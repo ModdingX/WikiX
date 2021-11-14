@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Home - LibX Wiki</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "The LibX config system.", url: "#_top", children: [
+              {title: "Creating a config", url: "#creating-a-config" },
+              {title: "Config Types", url: "#config-types" },
+              {title: "Reloading configs", url: "#reloading-configs" },
+              {title: "Extending the config system", url: "#extending-the-config-system" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="key_types/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="key_types/" class="btn btn-xs btn-link">
+        Key Types
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../registration/advanced/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../registration/advanced/" class="btn btn-xs btn-link">
+        Advanced
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="the-libx-config-system">The LibX config system.</h1>
+<p>LibX provides a custom config system based on json files.
+This will outline the basics of the config system, for more information see the javadoc.</p>
+<h3 id="creating-a-config">Creating a config</h3>
+<p>A config is a java class with some annotations.
+Adding config values are meant to be as adding a field to a class.
+An example for a config class is shown here:</p>
+<div class="codehilite" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #0000FF">public</span> <span style="color: #0000FF">class</span> <span style="color: #007575">MyConfig</span> {
+
+    <span style="color: #CC00A3">@Config</span>(<span style="color: #009C00">&quot;A command for a config key&quot;</span>)
+    <span style="color: #0000FF">public</span> <span style="color: #0000FF">static</span> String someValue = <span style="color: #009C00">&quot;Hello&quot;</span>;
+
+    <span style="color: #CC00A3">@Config</span>({
+            <span style="color: #009C00">&quot;Multiline comments&quot;</span>,
+            <span style="color: #009C00">&quot;work aas well&quot;</span>
+    })
+    <span style="color: #CC00A3">@IntRange</span>(min = 0, max = 20)
+    <span style="color: #0000FF">public</span> <span style="color: #0000FF">static</span> <span style="color: #0000FF">int</span> value = 3;
+
+    <span style="color: #0000FF">public</span> <span style="color: #0000FF">static</span> <span style="color: #0000FF">class</span> <span style="color: #007575">ConfigSubGroup</span> {
+
+        <span style="color: #CC00A3">@Config</span>
+        <span style="color: #0000FF">public</span> <span style="color: #0000FF">static</span> List&lt;List&lt;Integer&gt;&gt; listOfIntLists = List.of(List.of(1));
+    }
+}
+</code></pre></div>
+
+<p>Each field annotated ith <code>@Config</code> will become a config value and the value set in the config will be put into the field.
+The initial value of the field will become the default value.
+The fields must be <code>static</code> and may not be <code>final</code>.
+Null values are not allowed in the fields, but in the config json.
+For a lis tof supported field types, see <a href="key_types/">Config Key Types</a>.</p>
+<p>To register that config, use one of the <code>ConfigManager.registerConfig</code> methods:</p>
+<ul>
+<li><code>ConfigManager.registerConfig(String, Class&lt;?&gt;, boolean)</code>:
+     Register the primary config for your mod.
+     The first argument is the modid.
+     The last argument is the config type.
+     See below.
+     The config is stored in <code>.minecraft/config/modid.json5</code>.</li>
+<li><code>ConfigManager.registerConfig(ResourceLocation, Class&lt;?&gt;, boolean)</code>:
+     Register a config for your mod.
+     The first argument is the id for the config.
+     The last argument is the config type.
+     See below.
+     The config is stored in <code>.minecraft/config/namespace/path.json5</code>.</li>
+</ul>
+<h3 id="config-types">Config Types</h3>
+<p>There are two types fo config:</p>
+<p>Common configs and client configs.
+Common configs are present on both client and server.
+They are synced from the server to the client, so you can expect the values set on the server, a client is currently playing on.</p>
+<p>Client configs on the other side are only present on the client and won't be synced.</p>
+<h3 id="reloading-configs">Reloading configs</h3>
+<p>Using the command <code>/libx reload</code>, configs can be reloaded.</p>
+<h3 id="extending-the-config-system">Extending the config system</h3>
+<p>You can add custom config mappers to make your config support more types.
+You can also add custom validators that can be added to field through an annotation to further validate values.
+This however is not described here.</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="key_types/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="key_types/" class="btn btn-xs btn-link">
+        Key Types
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../registration/advanced/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../registration/advanced/" class="btn btn-xs btn-link">
+        Advanced
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/noeppi-noeppi/LibX/edit/master/docs/config/index.md">Edit on noeppi-noeppi/LibX</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

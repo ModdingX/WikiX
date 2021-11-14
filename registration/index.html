@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Home - LibX Wiki</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "The LibX Registration System", url: "#_top", children: [
+              {title: "Customising Registration", url: "#customising-registration" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="base_classes/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="base_classes/" class="btn btn-xs btn-link">
+        Base Classes
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../first_steps/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../first_steps/" class="btn btn-xs btn-link">
+        First Steps
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="the-libx-registration-system">The LibX Registration System</h1>
+<p>The LibX registration system allows you to easily register stuff into forge registries.
+To use it, you need your mod class to extend <code>ModXRegistration</code> instead of <code>ModX</code>.
+Then you need to override the <code>initRegistration</code> method:</p>
+<div class="codehilite" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #CC00A3">@Override</span>
+<span style="color: #0000FF">protected</span> <span style="color: #0000FF">void</span> <span style="color: #C34E00">initRegistration</span>(RegistrationBuilder builder) {
+    builder.setVersion(0);
+}
+</code></pre></div>
+
+<p>That method can be used to add custom registry transformers and conditions and enable builtin transformers. See <a href="advanced/">Advanced Registration</a></p>
+<p>You can then set registration handlers in your mods constructor like this:</p>
+<div class="codehilite" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #0000FF">this</span>.addRegistrationHandler(ModItems::register)
+</code></pre></div>
+
+<p>This will add the <code>register()</code> method in the <code>ModItems</code> class as a registration handler.</p>
+<p>Instead of registration handlers, you can also use <a href="../modinit/registration/">ModInit</a></p>
+<p>When registration loads, the method is called. It should then register objects using <code>ModXRegistration#register(String, Object)</code>.
+The first parameter is the name of the object to register.
+This should not include the <code>modid:</code> part, this is added by <code>ModXRegistration</code> automatically.</p>
+<p>Each object that is registered to the LibX registration system will be registered to a matching Forge Registry if one exists.</p>
+<h3 id="customising-registration">Customising Registration</h3>
+<p>To register more complex things through the LibX registration system, make them implement the <code>Registerable</code> interface.
+This allows objects that are registered to run code during <code>FMLCommonSetupEvent</code> and <code>FMLClientSetupEvent</code>.
+It also allows registering additional objects to the one object.
+This for example allows registering an item together with a block automatically.</p>
+<div class="codehilite" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #CC00A3">@Override</span>
+<span style="color: #0000FF">public</span> Set&lt;Object&gt; <span style="color: #C34E00">getAdditionalRegisters</span>(ResourceLocation id) {
+    <span style="color: #FF0000; font-style: italic">// Return a set of objects to register with this one</span>
+    <span style="color: #FF0000; font-style: italic">// They&#39;ll use the same registry name.</span>
+}
+
+<span style="color: #CC00A3">@Override</span>
+<span style="color: #0000FF">public</span> Map&lt;String, Object&gt; <span style="color: #C34E00">getNamedAdditionalRegisters</span>(ResourceLocation id) {
+    <span style="color: #FF0000; font-style: italic">// Return a map of objects to register with this one</span>
+    <span style="color: #FF0000; font-style: italic">// The registry name of these is created by the registry name</span>
+    <span style="color: #FF0000; font-style: italic">// of this object + &quot;_&quot; + the key in the map.</span>
+}
+</code></pre></div>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="base_classes/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="base_classes/" class="btn btn-xs btn-link">
+        Base Classes
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../first_steps/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../first_steps/" class="btn btn-xs btn-link">
+        First Steps
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/noeppi-noeppi/LibX/edit/master/docs/registration/index.md">Edit on noeppi-noeppi/LibX</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

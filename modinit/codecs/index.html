@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Codecs - LibX Wiki</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "ModInit Codecs", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav">
+      <a href="../registration/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../registration/" class="btn btn-xs btn-link">
+        Registration
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="modinit-codecs">ModInit Codecs</h1>
+<p>ModInit can be used to generate simple codecs for classes.</p>
+<p>To generate a codec for a class, add <code>@PrimaryConstructor</code> to one of its constructors.
+The constructor parameters will form the codec parameters.
+By adding different annotations to the constructor parameters, you can customise what kind a parameter is and configure it more precisely.
+See the javadocs of <code>@PrimaryConstructor</code> for more information.</p>
+<p>For each parameter, there must either be a public field with the same name, a getter with the same name or a getter in beans style.
+These are used to get the values when writing in a codec.</p>
+<p>To get the generated codec, use <code>Codecs.get(Class&lt;?&gt;,Class&lt;?&gt;)</code> with your mods class and the class, the codec was generated for.</p>
+<p>Parameters can be of any type that fulfills one of the following criteria by default:
+  * DataFixerUpper provides a builtin Codec for that type
+  * The class of the parameter has a <code>public</code> <code>static</code> <code>final</code> field named <code>CODEC</code> or <code>DIRECT_CODEC</code> for that type.</p>
+<p>Other types can be supported by other annotations.</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav">
+      <a href="../registration/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../registration/" class="btn btn-xs btn-link">
+        Registration
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/noeppi-noeppi/LibX/edit/master/docs/modinit/codecs.md">Edit on noeppi-noeppi/LibX</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

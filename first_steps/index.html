@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>First Steps - LibX Wiki</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "First Steps", url: "#_top", children: [
+              {title: "Declare dependency in mods.toml", url: "#declare-dependency-in-modstoml" },
+              {title: "Extending ModX", url: "#extending-modx" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../registration/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../registration/" class="btn btn-xs btn-link">
+        Home
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href=".." class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href=".." class="btn btn-xs btn-link">
+        Home
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="first-steps">First Steps</h1>
+<p>Add LibX as a dependency as described <a href="..">here</a>.</p>
+<h3 id="declare-dependency-in-modstoml">Declare dependency in mods.toml</h3>
+<p>Put this into your <code>mods.toml</code> file and replace <code>modid</code> with your mods id and <code>libx_version</code> with the minimum required LibX version..</p>
+<div class="codehilite" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #0000FF">[[dependencies.modid]]</span>
+    modId=<span style="color: #009C00">&quot;libx&quot;</span>
+    mandatory=<span style="color: #0000FF">true</span>
+    versionRange=<span style="color: #009C00">&quot;[libx_version,)&quot;</span>
+    ordering=<span style="color: #009C00">&quot;NONE&quot;</span>
+    side=<span style="color: #009C00">&quot;BOTH&quot;</span>
+</code></pre></div>
+
+<h3 id="extending-modx">Extending ModX</h3>
+<p>Most stuff in LibX requires your mod class to extends <code>ModX</code>.</p>
+<p>This will provide you with some abstract methods for setup events and a logger.
+You can also pass a <code>CreativeModeTab</code> to the <code>super</code> constructor. This tab is then used as the mods tab by other LibX features.
+If you plan to add multiple creative tabs, you should not use this feature.</p>
+<p>You should now check out other parts in the wiki to see what features from LibX are useful for you.</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../registration/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../registration/" class="btn btn-xs btn-link">
+        Home
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href=".." class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href=".." class="btn btn-xs btn-link">
+        Home
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/noeppi-noeppi/LibX/edit/master/docs/first_steps.md">Edit on noeppi-noeppi/LibX</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
