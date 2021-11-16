@@ -79,9 +79,11 @@ See the javadocs of <code>@PrimaryConstructor</code> for more information.</p>
 <p>For each parameter, there must either be a public field with the same name, a getter with the same name or a getter in beans style.
 These are used to get the values when writing in a codec.</p>
 <p>To get the generated codec, use <code>Codecs.get(Class&lt;?&gt;,Class&lt;?&gt;)</code> with your mods class and the class, the codec was generated for.</p>
-<p>Parameters can be of any type that fulfills one of the following criteria by default:
-  * DataFixerUpper provides a builtin Codec for that type
-  * The class of the parameter has a <code>public</code> <code>static</code> <code>final</code> field named <code>CODEC</code> or <code>DIRECT_CODEC</code> for that type.</p>
+<p>Parameters can be of any type that fulfills one of the following criteria by default:</p>
+<ul>
+<li>DataFixerUpper provides a builtin Codec for that type</li>
+<li>The class of the parameter has a <code>public</code> <code>static</code> <code>final</code> field named <code>CODEC</code> or <code>DIRECT_CODEC</code> for that type.</li>
+</ul>
 <p>Other types can be supported by other annotations.</p>
 
   <br>

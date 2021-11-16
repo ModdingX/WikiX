@@ -93,10 +93,12 @@ If you have multiple mods in one project, you need to use <code>@ForMod</code> t
 <p>Add <code>@Model</code> to a field of type <code>BakedModel</code> to load a model into that field.</p>
 <h3 id="adding-data-providers">Adding data providers</h3>
 <p>Add <code>@Datagen</code> to the class of a data provider to register it for datagen.
-The class must declare exactly one constructor that takes any arguments with the following types:
-  * <code>ModX</code>
-  * <code>DataGenerator</code>
-  * <code>ExistingFileHelper</code></p>
+The class must declare exactly one constructor that takes any arguments with the following types:</p>
+<ul>
+<li><code>ModX</code></li>
+<li><code>DataGenerator</code></li>
+<li><code>ExistingFileHelper</code></li>
+</ul>
 <h3 id="registering-configs">Registering Configs</h3>
 <p>Using <code>@RegisterConfig</code> and <code>@RegisterMapper</code> you can register configs and mappers for the LibX config system.</p>
 <h3 id="advanced-modinit-features">Advanced ModInit Features</h3>
