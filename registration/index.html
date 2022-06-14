@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://moddingx.github.io/WikiX/registration/index.html">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Home - LibX Wiki</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "The LibX Registration System", url: "#_top", children: [
+              {title: "The Registerable interface", url: "#the-registerable-interface" },
+              {title: "The MultiRegisterable interface", url: "#the-multiregisterable-interface" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="transformers.html" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="transformers.html" class="btn btn-xs btn-link">
+        Registry Transformers
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../config/key_types.html" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../config/key_types.html" class="btn btn-xs btn-link">
+        Key Types
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="the-libx-registration-system">The LibX Registration System</h1>
+<p>LibX provides a system to register objects into forge and vanilla registries, that is meant to circumvent some of the flaws, the <code>RegistryObject</code> system has.
+The LibX system has several advantages over the one provided by forge, such as:</p>
+<ul>
+<li>Less code that is more concise.</li>
+<li>Grouping of objects that belong together but go in different registries.</li>
+<li>No need for a <code>.get()</code> to access a registered object while there is still the possibility to allow registry replacements on your registered objects.</li>
+</ul>
+<p>To get started, implement <code>ModXRegistration</code> with your mod class.
+You'll now need to override the <code>initRegistration</code> method, where you can tweak some of the more advanced features of the system.
+For more information, see <a href="transformers.html">registry transformers</a> and <a href="tracking.html">registry tracking</a>.</p>
+<p>Next, you need to call <code>ModXRegistration#addRegistrationHandler</code> in your mod constructor with a reference to a method that registers items to your mod. Alternatively, you can use <a href="../modinit/registration.html">modinit</a> for that.</p>
+<p>Inside a registration handler, you can register objects using <code>ModXRegistration#register</code>.
+There is also <code>ModXRegistration#registerMulti</code> which can register multiple objects to the same registry at once.
+See <a href="#the-multiregisterable-interface">here</a> for more information.
+Also there is <code>ModXRegistration#createHolder</code> which will not only register your item but also create a holder for it that is updated with the registry.</p>
+<h3 id="the-registerable-interface">The Registerable interface</h3>
+<p>To really make use of the LibX registration system, you can implement the <code>Registerable</code> interface on every object that is registered to the system to further customise, how it's registered.
+<code>Registerable</code> provides the following methods:</p>
+<ul>
+<li><code>registerCommon</code>: Called during <code>FMLCommonSetupEvent</code>.
+    Gets a context with the id and target registry for the object and a way to enqueue tasks.</li>
+<li><code>registerClient</code>: Like <code>registerCommon</code> but for <code>FMLClientSetupEvent</code>.</li>
+<li><code>registerAdditional</code>: This gets an <code>EntryCollector</code> which can be used to register additional objects together with this one.
+    This can for example be used to register an <code>Item</code> together with a <code>Block</code> or a <code>BlockEntityType</code> together with a <code>MenuType</code>.
+    For an example, see <code>BlockBase</code>.</li>
+<li><code>initTracking</code>: Initialises nested <a href="tracking.html">registry tracking</a>.</li>
+</ul>
+<p>Using these methods, a single object can register a bunch of other things with it.
+This works for anything, so a single <code>Block</code> could register slabs, stairs, doors, trapdoors, ... by just passing one object to the system.</p>
+<h3 id="the-multiregisterable-interface">The MultiRegisterable interface</h3>
+<p>Sometimes it might be desirable to register a whole lot of items to the same registry, where the registry is not known before.
+Consider a block that should be available in all 16 dye colours.
+Having a single object that can be registered that then creates 16 <code>Block</code> instances from a factory method would reduce the code quite much.
+LibX actually has a builtin class for this: <code>EnumObjects</code>.</p>
+<p><code>MultiRegisterable</code> exists to solve this problem.
+It is structured very similar to noraml <a href="#the-registerable-interface">registerable</a>, however its <code>registerAdditional</code> method can register objects without explicitly giving a registry.
+Instead they will inherit the registry from the <code>MultiRegisterable</code> object.
+A <code>MultiRegisterable</code> object is registered with <code>ModXRegistration#registerMulti</code> instead of <code>ModXRegistration#register</code>.</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="transformers.html" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="transformers.html" class="btn btn-xs btn-link">
+        Registry Transformers
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../config/key_types.html" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../config/key_types.html" class="btn btn-xs btn-link">
+        Key Types
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/ModdingX/LibX/edit/master/docs/registration/index.md">Edit on ModdingX/LibX</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

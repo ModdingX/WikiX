@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     
-    <link rel="canonical" href="https://moddingx.github.io/WikiX/config/key_types.html">
+    <link rel="canonical" href="https://moddingx.github.io/WikiX/registration/tracking.html">
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Key Types - LibX Wiki</title>
+    <title>Registry Tracking - LibX Wiki</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "List of builtin config key types", url: "#_top", children: [
+          {title: "Registry Tracking", url: "#_top", children: [
           ]},
         ];
 
@@ -59,20 +59,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../registration/index.html" class="btn btn-xs btn-default pull-right">
+      <a href="../modinit/index.html" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../registration/index.html" class="btn btn-xs btn-link">
+      <a href="../modinit/index.html" class="btn btn-xs btn-link">
         Home
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="index.html" class="btn btn-xs btn-default pull-left">
+      <a href="transformers.html" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="index.html" class="btn btn-xs btn-link">
-        Home
+        Previous</a><a href="transformers.html" class="btn btn-xs btn-link">
+        Registry Transformers
       </a>
     </div>
     
@@ -80,33 +80,13 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="list-of-builtin-config-key-types">List of builtin config key types</h1>
-<p>This list may change from time to time.
-For a complete list, see the javadocs of the ConfigManager class.</p>
-<p>This is a list of all types that can be used as a type for a config field:</p>
-<ul>
-<li><code>boolean</code> / <code>Boolean</code></li>
-<li><code>byte</code> / <code>Byte</code></li>
-<li><code>short</code> / <code>Short</code></li>
-<li><code>int</code> / <code>Integer</code></li>
-<li><code>long</code> / <code>Long</code></li>
-<li><code>float</code> / <code>Float</code></li>
-<li><code>double</code> / <code>Double</code></li>
-<li><code>String</code></li>
-<li><code>Optional&lt;T&gt;</code> if <code>T</code> is supported. Empty optionals will get <code>null</code> in the json.</li>
-<li><code>List&lt;T&gt;</code> if <code>T</code> is supported.</li>
-<li><code>Map&lt;String, T&gt;</code> if <code>T</code> is supported.</li>
-<li><code>Pair&lt;A, B&gt;</code> if <code>A</code> and <code>B</code> are supported.</li>
-<li><code>Triple&lt;A, B, C&gt;</code> if <code>A</code>, <code>B</code>  and <code>C</code> are supported.</li>
-<li>Every <code>enum</code></li>
-<li>Every <code>record</code> if the types of all record components are supported.</li>
-<li><code>UUID</code></li>
-<li><code>ResourceLocation</code></li>
-<li><code>ResourceList</code></li>
-<li><code>Ingredient</code></li>
-<li><code>IngredientStack</code></li>
-<li><code>Component</code></li>
-</ul>
+    <h1 id="registry-tracking">Registry Tracking</h1>
+<p>Registry Tracking is the process of keeping your fields updated with the current value from the registry.
+This also works with <code>final</code> fields.
+To add a field to the registry tracker, use <code>RegistryTracker#track</code>.
+This works for both static and instance fields.</p>
+<p>To systematically use registry tracking, there is a method named <code>enableRegistryTracking</code> that can be called in <code>initRegistration</code>.
+This will cause all fields registered by <a href="../modinit/registration.html">ModInit</a> to be added to the registry tracker and will cause <code>Registerable#initTracking</code> to be called, whenever a <code>Registerable</code> is registered, so registered objects can add their child objects to the tracker as well.</p>
 
   <br>
     
@@ -119,20 +99,20 @@ For a complete list, see the javadocs of the ConfigManager class.</p>
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../registration/index.html" class="btn btn-xs btn-default pull-right">
+      <a href="../modinit/index.html" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../registration/index.html" class="btn btn-xs btn-link">
+      <a href="../modinit/index.html" class="btn btn-xs btn-link">
         Home
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="index.html" class="btn btn-xs btn-default pull-left">
+      <a href="transformers.html" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="index.html" class="btn btn-xs btn-link">
-        Home
+        Previous</a><a href="transformers.html" class="btn btn-xs btn-link">
+        Registry Transformers
       </a>
     </div>
     
@@ -143,7 +123,7 @@ For a complete list, see the javadocs of the ConfigManager class.</p>
 
 <footer class="container-fluid wm-page-content">
       <p>
-        <a href="https://github.com/ModdingX/LibX/edit/master/docs/config/key_types.md">Edit on ModdingX/LibX</a>
+        <a href="https://github.com/ModdingX/LibX/edit/master/docs/registration/tracking.md">Edit on ModdingX/LibX</a>
       </p>
   <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
 </footer>

@@ -2,32 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://moddingx.github.io/WikiX/index.html</loc>
-         <lastmod>2022-06-12</lastmod>
+         <lastmod>2022-06-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://moddingx.github.io/WikiX/first_steps.html</loc>
-         <lastmod>2022-06-12</lastmod>
+         <lastmod>2022-06-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://moddingx.github.io/WikiX/config/index.html</loc>
-         <lastmod>2022-06-12</lastmod>
+         <lastmod>2022-06-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://moddingx.github.io/WikiX/config/key_types.html</loc>
-         <lastmod>2022-06-12</lastmod>
+         <lastmod>2022-06-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://moddingx.github.io/WikiX/modinit/index.html</loc>
-         <lastmod>2022-06-12</lastmod>
+         <lastmod>2022-06-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://moddingx.github.io/WikiX/modinit/codecs.html</loc>
-         <lastmod>2022-06-12</lastmod>
+         <lastmod>2022-06-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://moddingx.github.io/WikiX/modinit/registration.html</loc>
+         <lastmod>2022-06-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://moddingx.github.io/WikiX/registration/index.html</loc>
+         <lastmod>2022-06-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://moddingx.github.io/WikiX/registration/tracking.html</loc>
+         <lastmod>2022-06-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://moddingx.github.io/WikiX/registration/transformers.html</loc>
+         <lastmod>2022-06-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://moddingx.github.io/WikiX/modinit/registration.html">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Registration - LibX Wiki</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "ModInit Registration", url: "#_top", children: [
+              {title: "Customizing elements", url: "#customizing-elements" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav">
+      <a href="codecs.html" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="codecs.html" class="btn btn-xs btn-link">
+        Codecs
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="modinit-registration">ModInit Registration</h1>
+<p>ModInit has a system to register each <code>public static final</code> field from a class into a set registry.
+If <a href="../registration/tracking.html">registry tracking</a> is enabled, these fields will also be added as tracking targets for their containede elements.
+To get started, apply <code>@RegisterClass</code> to your class.
+The target registry is set by the <code>registry</code> field in <code>@RegisterClass</code>. This can be the empty string to register elements without a registry.
+(Only really makes sense on <code>Registerable</code>s though)
+To set a registry, set the field name of a field from either the <code>ForgeRegistries.Keys</code> class or the <code>Registry</code> class.
+The field must be <code>public static final</code> and have a type of <code>ResourceKey&lt;? extends Registry&lt;T&gt;&gt;</code> where <code>T</code> is the type you want to register in that class.</p>
+<p>If your registry key is stored in another class, you can use the <code>registryClass</code> field in <code>@RegisterClass</code>.
+This allows to set another class where the registry key is stored.</p>
+<p>An example could look like this:</p>
+<div class="codehilite" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #CC00A3">@RegisterClass</span>(registry = <span style="color: #009C00">&quot;ITEM_REGISTRY&quot;</span>)
+<span style="color: #0000FF">public</span> <span style="color: #0000FF">class</span> <span style="color: #007575">ModItems</span> {
+
+    <span style="color: #0000FF">public</span> <span style="color: #0000FF">static</span> <span style="color: #0000FF">final</span> ItemBase rawSteel = <span style="color: #0000FF">new</span> ItemBase(MyMod.getInstance(), <span style="color: #0000FF">new</span> Item.Properties()); <span style="color: #FF0000; font-style: italic">// mymod:raw_steel</span>
+    <span style="color: #0000FF">public</span> <span style="color: #0000FF">static</span> <span style="color: #0000FF">final</span> Item steel = <span style="color: #0000FF">new</span> Item(<span style="color: #0000FF">new</span> Item.Properties().tab(MyMod.getInstance().tab)); <span style="color: #FF0000; font-style: italic">// mymod:steel</span>
+    <span style="color: #0000FF">public</span> <span style="color: #0000FF">static</span> <span style="color: #0000FF">final</span> Item chickenFricassee = <span style="color: #0000FF">new</span> Item(<span style="color: #0000FF">new</span> Item.Properties().food(Foods.CHICKEN)); <span style="color: #FF0000; font-style: italic">// mymod:chicken_fricassee</span>
+}
+</code></pre></div>
+
+<p>The comment after each line shows the id used to register the item.</p>
+<h3 id="customizing-elements">Customizing elements</h3>
+<p>To further customise, how elements are registered, use the annotations from <code>@Reg</code>:</p>
+<ul>
+<li><code>@Reg.Multi</code> treats the field as <a href="../registration/index.html#the-multiregisterable-interface">MultiRegisterable</a>.</li>
+<li><code>@Reg.Exclude</code> will exclude a field from registration.</li>
+<li><code>@Reg.Name</code> allows to set a custom name used for registration.</li>
+</ul>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav">
+      <a href="codecs.html" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="codecs.html" class="btn btn-xs btn-link">
+        Codecs
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/ModdingX/LibX/edit/master/docs/modinit/registration.md">Edit on ModdingX/LibX</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

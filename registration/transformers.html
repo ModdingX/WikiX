@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://moddingx.github.io/WikiX/registration/transformers.html">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Registry Transformers - LibX Wiki</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Registry Conditions and Transformers", url: "#_top", children: [
+              {title: "Registry Conditions", url: "#registry-conditions" },
+              {title: "Registry Transformers", url: "#registry-transformers" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="tracking.html" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="tracking.html" class="btn btn-xs btn-link">
+        Registry Tracking
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="index.html" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="index.html" class="btn btn-xs btn-link">
+        Home
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="registry-conditions-and-transformers">Registry Conditions and Transformers</h1>
+<p>Registry conditions and transformers can filter and modify elements before they are passed to the LibX registration system.</p>
+<h3 id="registry-conditions">Registry Conditions</h3>
+<p>Registry Conditions implement the <code>RegistryCondition</code> interface.
+They have a method called <code>shouldRegister</code> that is called with each object that is about to be registered.
+Only if all conditions return <code>true</code> for an object, it can be registered.
+To add a registry condition, use <code>RegistrationBuilder#condition</code> in your <code>initRegistration</code> method.</p>
+<p>The following condition would exclude all <code>Item</code>s from registration:</p>
+<div class="codehilite" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #0000FF">public</span> <span style="color: #0000FF">class</span> <span style="color: #007575">ExcludeItems</span> <span style="color: #0000FF">implements</span> RegistryCondition {
+
+    <span style="color: #0000FF">public</span> <span style="color: #0000FF">boolean</span> <span style="color: #C34E00">shouldRegister</span>(RegistrationContext ctx, Object value) {
+        <span style="color: #0000FF">return</span> ctx.registry().isEmpty() || Registry.ITEM_REGISTRY != ctx.registry().get();
+    }
+}
+</code></pre></div>
+
+<h3 id="registry-transformers">Registry Transformers</h3>
+<p>Registry Transformers implement the <code>RegistryTransformer</code> interface.
+They have a method called <code>transform</code> that is called with each object that is about to be registered and passed the registry conditions.
+That method gets an <code>EntryCollector</code> as argument, which allows to register additional objects together with the original one.
+To add a registry transformer, use <code>RegistrationBuilder#transformer</code> in your <code>initRegistration</code> method.</p>
+<p>The following transformer would register a <code>BlockItem</code> with every registered block:</p>
+<div class="codehilite" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #0000FF">public</span> <span style="color: #0000FF">class</span> <span style="color: #007575">BlockItems</span> <span style="color: #0000FF">implements</span> RegistryTransformer {
+
+    <span style="color: #0000FF">public</span> <span style="color: #0000FF">void</span> <span style="color: #C34E00">transform</span>(RegistrationContext ctx, Object value, Registerable.EntryCollector builder) {
+        <span style="color: #0000FF">if</span> (value <span style="color: #0000FF">instanceof</span> Block block) {
+            builder.register(Registry.ITEM_REGISTRY, <span style="color: #0000FF">new</span> BlockItem(block, <span style="color: #0000FF">new</span> Item.Properties()));
+        }
+    }
+}
+</code></pre></div>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="tracking.html" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="tracking.html" class="btn btn-xs btn-link">
+        Registry Tracking
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="index.html" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="index.html" class="btn btn-xs btn-link">
+        Home
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/ModdingX/LibX/edit/master/docs/registration/transformers.md">Edit on ModdingX/LibX</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
