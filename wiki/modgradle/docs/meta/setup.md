@@ -201,6 +201,7 @@ Example:
 ```groovy
 changelog { "This is some dummy changelog text that" }
 ```
+Inside the provided `Closure`, you have access to `commitFormat`, the [corresponding setting](#commitformat) in the `git` block (`null` if not set) and `defaultChangelog` which is the changelog, ModGradle would generate without a custom changelog block.
 
 ## artifacts
 
