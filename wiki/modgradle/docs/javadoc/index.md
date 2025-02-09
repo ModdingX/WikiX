@@ -49,6 +49,6 @@ Each key in this object defines a *namespace* of links to include.
 The value of each namespace must be a list of *javadoc link resources*.
 
 A javadoc link resource then has one of two forms:
-* `{"url":"<uri>"}`: A simple linkage to a remote URI.
-* `{"url":"<url>","res":"<uri>"}`: A linkage, where the javadoc is built on demand and therefore can't be used for linking at javadoc build time. `res` instead contains a URI pointing to a jar-file with the built javadoc of the artifact. ModGradle will use th contents of the `res` file to generate links pointing to `url`.
 
+  * `{"url":"<uri>"}`: A simple linkage to a remote URI.
+  * `{"url":"<url>","res":"<uri>"}`: A linkage, where the javadoc is built on demand and therefore can't be used for linking at javadoc build time. `res` instead contains a URI pointing to a jar-file with the built javadoc of the artifact. ModGradle will use th contents of the `res` file to generate links pointing to `url`.
