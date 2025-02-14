@@ -240,8 +240,12 @@ Expansion always adds the `mod` extension itself as a parameter, so all [mod pro
 This allows configuration of the runs.
 By default ModGradle uses a suitable default configuration for runs.
 If this is not desired, it can be turned off using `noAutoConfig()`.
-To configure the runs, there are methods `all`, `client`, `server`, `data` and `gameTestServer` where the first one configures all runs and the others just configure their respective run.
+To configure the runs, there are methods `client`, `server`, `clientData`, `serverData` and `gameTestServer` which configure the appropriate runs.
+There is also `all` to configure all runs and `data` to configure client an server data runs.
 The closures passed to these functions are directly passed to NeoGradle.
+
+On minecraft versions before `1.21.4`, there was only a single data run type.
+In this case, `clientData` is used for the `data` run config and `serverData` is ignored.
 
 ## publishing
 
