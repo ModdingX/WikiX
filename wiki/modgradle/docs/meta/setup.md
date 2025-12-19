@@ -17,7 +17,7 @@ Sets the version of NeoForge used to compile the mod.
 It is a required property.
 Example:
 ```groovy
-minecraft '21.1.66'
+neoforge '21.1.66'
 ```
 
 ## minecraft
