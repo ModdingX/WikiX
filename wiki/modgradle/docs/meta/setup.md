@@ -221,24 +221,16 @@ artifacts {
 In this example, both sources and javadoc jar-files will be created during the build process.
 However, only the sources will get published to maven and uploaded to mod hosting websites.
 
-### Using JarJar as the main artifact
+### useJarJar
 
 By default, ModGradle uses the `jar` task as the main artifact for publishing and uploading.  
-You can switch to using the `jarJar` task (and optionally adjust classifiers) like this:
+You can switch to using the `jarJar` task like this:
 
 ```groovy
 artifacts {
-    useJarJar(true)
+    useJarJar()
 }
 ```
-
-This makes ModGradle use `jarJar` as the main artifact.
-With `true`, it also applies the common “thin + bundled” layout:
-
-- `jar` → `-thin`
-- `jarJar` → no classifier
-
-If you want to use `jarJar` without changing classifiers, call `useJarJar()` without arguments.
 
 ## resources
 
