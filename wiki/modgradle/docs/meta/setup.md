@@ -232,6 +232,22 @@ artifacts {
 }
 ```
 
+### extra
+
+You can add additional artifacts to publish and upload by using this block. The example uses the `jarJar` task artifact 
+as additional artifact with classifier `extra`. You can specify any task name instead of `jarJar`.
+
+Example:
+```groovy
+artifacts {
+    extra('jarJar') {
+        classifier 'extra'
+        publishToRepositories()
+        uploadToModHostingSites()
+    }
+}
+```
+
 ## resources
 
 The `resources` block allows to specify in which files parameter expansion should take place.
